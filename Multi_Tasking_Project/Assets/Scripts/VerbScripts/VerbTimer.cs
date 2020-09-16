@@ -5,42 +5,83 @@ using UnityEngine.UI;
 public class VerbTimer : MonoBehaviour
 {
     #region Timer Stuff
+    [Header("Timer Stuff")]
     public float timeLeft;
     private float startTime;
     public Text countDown;
     #endregion
     #region GameState Stuff
+    [Header("GamesState Stuff")]
     private PlayerActions Player_A;
-    public enum GameState {Active,Paused,Deactivated}
-    public GameState currentState;
+    public enum GameState {Start,Active,Paused,ReadyToCollect}
+    public GameState currentState, lastState;
+    public bool SetLastState,setCurrentState,OneTime;
+    #endregion
+    #region Collection Stuff
+    [Header("collection Stuff")]
+    public Button button;
+    public Text buttonText;
     #endregion
     private void Awake()
     {
         Player_A = GameObject.Find("MainCamera").GetComponent<PlayerActions>();
-        currentState = GameState.Active;
+        button = GameObject.Find("ClickableButton").GetComponent<Button>();
+        currentState = GameState.Start;
         startTime = timeLeft;
     }
     void Start()
     {
-            StartCoroutine("LoseTime");
-            Time.timeScale = 1;
+        StartCoroutine("LoseTime");
+        Time.timeScale = 1;
     }
     void Update()
     {
     ///Switching States when game is fully paused or not fully paused///
     if(Player_A.currentState == PlayerActions.GameState.Paused)
             {
-            currentState = GameState.Paused;
+            setCurrentState = false;
+            if(!OneTime)
+            {
+                setLastState();
+                OneTime = true;
+            }
+            if(SetLastState == true)
+            {
+                currentState = GameState.Paused;
+            }
             }
     if(Player_A.currentState == PlayerActions.GameState.Active)
         {
-            currentState = GameState.Active;
+            OneTime = false;
+            SetLastState = false;
+            if(!setCurrentState)
+            {
+                SetCurrentState();
+            }
         }
     ///other stuff being updated constantly///
-        countDown.text = ("" + timeLeft);
-        if(timeLeft < 0)
+    countDown.text = ("" + timeLeft);
+    if(timeLeft < 0)
         {
-            currentState = GameState.Deactivated;
+            currentState = GameState.ReadyToCollect;
+            timeLeft = 0;
+        }
+    ///Starting State///
+    if(currentState == GameState.Start)
+        {
+            button.interactable = true;
+            buttonText.text = ("Start");
+        }
+    ///ReadyToCollectState///
+    if(currentState == GameState.ReadyToCollect)
+        {
+            button.interactable = true;
+            buttonText.text = ("Collect");
+        }
+    if(currentState == GameState.Active || currentState == GameState.Paused)
+        {
+            buttonText.text = "";
+            button.interactable = false;
         }
     }
     IEnumerator LoseTime()
@@ -52,7 +93,7 @@ public class VerbTimer : MonoBehaviour
             {
                 timeLeft -= 1;
             }
-            if(currentState == GameState.Paused)
+            if(currentState == GameState.Paused||currentState == GameState.ReadyToCollect||currentState == GameState.Start)
             {
                 timeLeft -= 0;
             }
@@ -60,7 +101,24 @@ public class VerbTimer : MonoBehaviour
     }
     public void Reactivate()
     {
-        timeLeft = startTime;
-        currentState = GameState.Active;
+        if(currentState == GameState.Start)
+        {
+            timeLeft = startTime;
+            currentState = GameState.Active;
+        }
+       if(currentState == GameState.ReadyToCollect)
+        {
+            currentState = GameState.Start;
+        }
+    }
+    public void setLastState()
+    {
+        lastState = currentState;
+        SetLastState = true;
+    }
+    public void SetCurrentState()
+    {
+        currentState = lastState;
+        setCurrentState = true;
     }
 }

@@ -12,26 +12,35 @@ public class CardTimer : MonoBehaviour
     #region CardState
     public enum GameState {ActiveState, PauseState, DeactiveState};
     public GameState currentState;
+    public PlayerActions Player_A;
     #endregion
     [Header("Input Card Asset Here")]
     public CardAsset cardAsset;
     private void Awake()
     {
+        Player_A = GameObject.Find("MainCamera").GetComponent<PlayerActions>();
         currentState = GameState.ActiveState;
     }
     void Start()
     {
         if (cardAsset.Aspect_Job == true)
         {
-            if(currentState == GameState.ActiveState)
-            {
                 StartCoroutine("LoseTimer");
                 Time.timeScale = 1;
-            }
         }
     }
     void Update()
     {
+        ///Switching States when game is fully paused or not fully paused///
+        if(Player_A.currentState == PlayerActions.GameState.Paused)
+        {
+            currentState = GameState.PauseState;
+        }
+        if(Player_A.currentState == PlayerActions.GameState.Active)
+        {
+            currentState = GameState.ActiveState;
+        }
+        ///other stuff being updated constantly///
         countDown.text = ("" + timeLeft);
         if(timeLeft <= 0)
         {

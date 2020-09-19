@@ -14,15 +14,12 @@ public class PlayerActions : MonoBehaviour
     #endregion
     #region UI Stuff
     private GameObject PausePanel;
+    public UIButtonControl ButtonControl;
     #endregion
     private void Awake()
     {
         currentState = GameState.Active;
         PausePanel = GameObject.Find("FullyPausePanel");
-    }
-    void Start()
-    {
-
     }
     void Update()
     {
@@ -51,10 +48,6 @@ zPos = transform.position.z;
                 transform.Translate(0f, -1f, 0f);
             }//player moves down
         }//stuff that happens when game state is active
- if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            currentState = GameState.Paused;
-        }
  /////player position limits////
  if(PlayerPos.x > X_Max)
         {
@@ -72,15 +65,37 @@ zPos = transform.position.z;
         {
             transform.position = new Vector3(xPos,Y_Min,zPos);
         }//max amount the player can move down in the y-direction
- ////Stuff that happens when the game is fully paused/////
- if(currentState == GameState.Paused)
+ ///Other Stuff being tracked in update///
+    if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PausePanel.SetActive(true);
+            if(currentState == GameState.Active)
+            {
+                Debug.Log("Game is now Paused");
+                ButtonControl.OptionsClicked = true;
+            }
+            if(currentState == GameState.Paused)
+            {
+                Debug.Log("Game is now Active");
+                UnPause();
+            }
+        }
+    if(ButtonControl.OptionsClicked == true)
+        {
+            Pause();
         }
     }
 public void UnPause()
     {
         currentState = GameState.Active;
         PausePanel.SetActive(false);
+        ButtonControl.OptionsClicked = false;
+        ButtonControl.Options.interactable = true;
+    }
+public void Pause()
+    {
+        currentState = GameState.Paused;
+        PausePanel.SetActive(true);
+        ButtonControl.OptionsClicked = true;
+        ButtonControl.Options.interactable = false;
     }
 }

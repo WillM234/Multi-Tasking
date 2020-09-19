@@ -8,6 +8,7 @@ public class VerbAutoTimer : MonoBehaviour
     public float timeLeft;
     private float startTime;
     public Text countDown;
+    public UIButtonControl ButtonControl;
     #endregion
     #region GameStates
     public enum GameState {ActiveState, PauseState, resetState}
@@ -59,9 +60,20 @@ public class VerbAutoTimer : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1);
-            if(currentState == GameState.ActiveState)
+            if (currentState == GameState.ActiveState)
             {
-                timeLeft -= 1;
+                if(ButtonControl.FastForwardClicked == true)
+                {
+                    timeLeft -= 2;
+                }
+                if(ButtonControl.NormalClicked == true)
+                {
+                    timeLeft -= 1;
+                }
+                if(ButtonControl.PauseClicked == true)
+                {
+                    timeLeft -= 0;
+                }
             }
             if(currentState == GameState.PauseState)
             {

@@ -9,6 +9,7 @@ public class VerbTimer : MonoBehaviour
     public float timeLeft;
     private float startTime;
     public Text countDown;
+    public UIButtonControl ButtonControl;
     #endregion
     #region GameState Stuff
     [Header("GamesState Stuff")]
@@ -48,7 +49,7 @@ public class VerbTimer : MonoBehaviour
             if(SetLastState == true)
             {
                 currentState = GameState.Paused;
-            }
+            }//sets local game state to pause
             }
     if(Player_A.currentState == PlayerActions.GameState.Active)
         {
@@ -89,11 +90,22 @@ public class VerbTimer : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1);
-            if(currentState == GameState.Active)
+            if (currentState == GameState.Active)  
             {
-                timeLeft -= 1;
+                if(ButtonControl.FastForwardClicked == true)
+                {
+                    timeLeft -= 2;
+                }
+                if(ButtonControl.NormalClicked == true)
+                {
+                    timeLeft -= 1;
+                }
+                if(ButtonControl.PauseClicked == true)
+                {
+                    timeLeft -= 0;
+                }
             }
-            if(currentState == GameState.Paused||currentState == GameState.ReadyToCollect||currentState == GameState.Start)
+            if(currentState != GameState.Active)
             {
                 timeLeft -= 0;
             }

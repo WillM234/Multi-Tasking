@@ -8,6 +8,7 @@ public class CardTimer : MonoBehaviour
     public float timeLeft, currentTime;
     public Text countDown;
     public bool setTimer;
+    public UIButtonControl ButtonControl;
     #endregion
     #region CardState
     public enum GameState {ActiveState, PauseState, DeactiveState};
@@ -58,12 +59,23 @@ public class CardTimer : MonoBehaviour
             yield return new WaitForSeconds(1);
             if(currentState == GameState.ActiveState)
             {
-                timeLeft -= 1;
+                if(ButtonControl.FastForwardClicked == true)
+                {
+                    timeLeft -= 2;
+                }
+                if(ButtonControl.NormalClicked == true)
+                {
+                    timeLeft -= 1;
+                }
+                if(ButtonControl.PauseClicked == true)
+                {
+                    timeLeft -= 0;
+                }
             }
             if (currentState == GameState.PauseState)
             {
                 timeLeft -= 0;
-            }  
+            }
         }
     }
 }

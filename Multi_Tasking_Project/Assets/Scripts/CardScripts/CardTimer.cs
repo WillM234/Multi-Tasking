@@ -8,18 +8,19 @@ public class CardTimer : MonoBehaviour
     public float timeLeft, currentTime;
     public Text countDown;
     public bool setTimer;
-    public UIButtonControl ButtonControl;
+    private UIButtonControl ButtonControl;
     #endregion
     #region CardState
     public enum GameState {ActiveState, PauseState, DeactiveState};
     public GameState currentState;
-    public PlayerActions Player_A;
+    private PlayerActions Player_A;
     #endregion
     [Header("Input Card Asset Here")]
     public CardAsset cardAsset;
     private void Awake()
     {
         Player_A = GameObject.Find("MainCamera").GetComponent<PlayerActions>();
+        ButtonControl = GameObject.Find("MainCamera").GetComponent<UIButtonControl>();
         currentState = GameState.ActiveState;
     }
     void Start()
@@ -42,7 +43,12 @@ public class CardTimer : MonoBehaviour
             currentState = GameState.ActiveState;
         }
         ///other stuff being updated constantly///
-        countDown.text = ("" + timeLeft);
+        if (cardAsset.Aspect_Job == true)
+        {
+            countDown.text = ("" + timeLeft);
+        }
+        else
+            countDown.text = "";
         if(timeLeft <= 0)
         {
             currentState = GameState.DeactiveState;
@@ -57,24 +63,27 @@ public class CardTimer : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1);
-            if(currentState == GameState.ActiveState)
+            if (cardAsset.Aspect_Job == true)
             {
-                if(ButtonControl.FastForwardClicked == true)
+                if (currentState == GameState.ActiveState)
                 {
-                    timeLeft -= 2;
+                    if (ButtonControl.FastForwardClicked == true)
+                    {
+                        timeLeft -= 2;
+                    }
+                    if (ButtonControl.NormalClicked == true)
+                    {
+                        timeLeft -= 1;
+                    }
+                    if (ButtonControl.PauseClicked == true)
+                    {
+                        timeLeft -= 0;
+                    }
                 }
-                if(ButtonControl.NormalClicked == true)
-                {
-                    timeLeft -= 1;
-                }
-                if(ButtonControl.PauseClicked == true)
+                if (currentState == GameState.PauseState)
                 {
                     timeLeft -= 0;
                 }
-            }
-            if (currentState == GameState.PauseState)
-            {
-                timeLeft -= 0;
             }
         }
     }

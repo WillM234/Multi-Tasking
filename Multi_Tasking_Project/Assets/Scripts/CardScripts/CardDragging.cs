@@ -5,9 +5,19 @@ using UnityEngine;
 public class CardDragging : MonoBehaviour
 {
     public bool UseP_Displacement = true;
-    bool dragging = false;
+    public bool dragging = false;
     Vector3 P_Displacement;
+    public Vector3 CardPos;
     float Z_Displacement;
+
+    [Header("Referenced Scripts")]
+    private CardPositioning TimePasses,VerbWork,VerbExplore,VerbStudy;
+    private PlayerActions Player_A;
+    private void Awake()
+    {
+        ///reference scripts, grabbing them through code instead of through inspector///
+        Player_A = GameObject.Find("MainCamera").GetComponent<PlayerActions>();
+    }
     private void OnMouseDown()
     {
         dragging = true;
@@ -19,18 +29,22 @@ public class CardDragging : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        if(dragging)
-        {dragging = false;}
+        if (dragging)
+        { dragging = false; }
     }
     private void Update()
     {
-        if(dragging)
-        {Vector3 mousePos = MouseInWorldCoords();
-        transform.position = new Vector3(mousePos.x - P_Displacement.x, mousePos.y - P_Displacement.y, transform.position.z);}
+        CardPos = transform.position;
+        if (dragging && Player_A.currentState == PlayerActions.GameState.Active && this.gameObject.tag == "Card")
+        {
+            Vector3 mousePos = MouseInWorldCoords();
+            transform.position = new Vector3(mousePos.x - P_Displacement.x, mousePos.y - P_Displacement.y, transform.position.z);
+        }
     }
     private Vector3 MouseInWorldCoords()
     {
         var screenMousePos = Input.mousePosition;
         screenMousePos.z = Z_Displacement;
-        return Camera.main.ScreenToWorldPoint(screenMousePos);}
+        return Camera.main.ScreenToWorldPoint(screenMousePos);
+    }
 }

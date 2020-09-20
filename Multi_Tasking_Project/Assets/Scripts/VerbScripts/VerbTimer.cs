@@ -7,7 +7,7 @@ public class VerbTimer : MonoBehaviour
     #region Timer Stuff
     [Header("Timer Stuff")]
     public float timeLeft;
-    private float startTime;
+    public float startTime;
     public Text countDown;
     public UIButtonControl ButtonControl;
     #endregion
@@ -26,9 +26,8 @@ public class VerbTimer : MonoBehaviour
     private void Awake()
     {
         Player_A = GameObject.Find("MainCamera").GetComponent<PlayerActions>();
-        button = GameObject.Find("ClickableButton").GetComponent<Button>();
         currentState = GameState.Start;
-        startTime = timeLeft;
+        startTime = timeLeft; 
     }
     void Start()
     {

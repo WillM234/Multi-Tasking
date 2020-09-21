@@ -14,7 +14,7 @@ public class Verb_Work : MonoBehaviour
     {
         VerbWork = GetComponent<CardPositioning>();
         WorkTimer = GetComponent<VerbTimer>();
-        SpawnPoint = new Vector3(VerbWork.SnapPosion.x, (VerbWork.SnapPosion.y - 100f), VerbWork.SnapPosion.z);
+        SpawnPoint = new Vector3(VerbWork.SnapPosition.x, (VerbWork.SnapPosition.y - 100f), VerbWork.SnapPosition.z);
     }
     void Update()
     {
@@ -23,7 +23,7 @@ public class Verb_Work : MonoBehaviour
 
             if (card.GetComponent<CardTimer>().cardAsset.Aspect_Job == true)
             {
-                if (card.transform.position == VerbWork.SnapPosion)
+                if (card.transform.position == VerbWork.SnapPosition)
                 {
                     cardInPos = true;
                     rewardAmount = card.GetComponent<CardTimer>().cardAsset.CurrencyReward;

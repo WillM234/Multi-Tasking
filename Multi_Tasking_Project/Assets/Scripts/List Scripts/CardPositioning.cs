@@ -6,7 +6,7 @@ public class CardPositioning : MonoBehaviour
 {
     public List<GameObject> Card = new List<GameObject>();
     public float X_min, X_max, Y_min, Y_max;
-    public Vector3 SnapPosion;
+    public Vector3 SnapPosition;
     private Vector3 CardPos;
     private void Update()
     {
@@ -15,7 +15,7 @@ public class CardPositioning : MonoBehaviour
             CardPos = card.transform.position;
             if((CardPos.x >= X_min && CardPos.x <= X_max)&&(CardPos.y <= Y_max && CardPos.y >= Y_min))
             {
-                card.transform.position = SnapPosion;
+                card.transform.position = SnapPosition;
             }
         }
     }

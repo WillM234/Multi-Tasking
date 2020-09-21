@@ -234,6 +234,11 @@ MonoBehaviour:
   setTimer: 0
   currentState: 0
   cardAsset: {fileID: 11400000, guid: d0a7bd1a87332439db47692e7fa832f1, type: 2}
+  CardPos: {x: 0, y: 0, z: 0}
+  in_wSnap: 0
+  in_tSnap: 0
+  in_eSnap: 0
+  in_sSnap: 0
 --- !u!114 &6482083802700993694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6037736, g: 0.5298336, b: 0.33321467, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

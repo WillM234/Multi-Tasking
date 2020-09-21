@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 4406271514706908350}
   - component: {fileID: 4406271514706908348}
   - component: {fileID: 6954457874597401021}
+  - component: {fileID: 8767329642960897320}
   m_Layer: 5
   m_Name: Verb_Work
   m_TagString: Untagged
@@ -548,6 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLeft: 0
+  startTime: 0
   countDown: {fileID: 4406271514118840242}
   ButtonControl: {fileID: 0}
   currentState: 0
@@ -573,8 +575,26 @@ MonoBehaviour:
   X_min: -290
   X_max: -230
   Y_min: 60
-  Y_max: 143.5
-  SnapPosion: {x: -260, y: 100, z: 0}
+  Y_max: 140
+  SnapPosition: {x: -260, y: 100, z: 0}
+--- !u!114 &8767329642960897320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4406271514706908351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fae5c3a84ac54b998a1ae24b0e76404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrencyPrefab: {fileID: 3050941182785896207, guid: 337ad133166084728beb950e3f9e7201,
+    type: 3}
+  SpawnPoint: {x: 0, y: 0, z: 0}
+  rewardAmount: 0
+  cardInPos: 0
+  OneTime: 0
 --- !u!1 &4406271514807891442
 GameObject:
   m_ObjectHideFlags: 0

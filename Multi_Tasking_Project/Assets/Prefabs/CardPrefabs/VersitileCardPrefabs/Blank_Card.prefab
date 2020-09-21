@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 7653649360001846794}
   - component: {fileID: 7353609054592964029}
   - component: {fileID: 8298500657356064406}
+  - component: {fileID: 7801917841541195376}
   m_Layer: 0
   m_Name: Blank_Card
   m_TagString: Card
@@ -463,11 +464,6 @@ MonoBehaviour:
   UseP_Displacement: 1
   dragging: 0
   CardPos: {x: 0, y: 0, z: 0}
-  TimePasses: {fileID: 0}
-  VerbWork: {fileID: 0}
-  VerbExplore: {fileID: 0}
-  VerbStudy: {fileID: 0}
-  Player_A: {fileID: 0}
 --- !u!114 &8298500657356064406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,10 +480,25 @@ MonoBehaviour:
   currentTime: 0
   countDown: {fileID: 7250392592761764733}
   setTimer: 0
-  ButtonControl: {fileID: 0}
   currentState: 0
-  Player_A: {fileID: 0}
   cardAsset: {fileID: 0}
+  CardPos: {x: 0, y: 0, z: 0}
+  in_wSnap: 0
+  in_tSnap: 0
+  in_eSnap: 0
+  in_sSnap: 0
+--- !u!114 &7801917841541195376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353609054592964018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2092556fd7f648179ef3211595aab5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7379296783574190562
 GameObject:
   m_ObjectHideFlags: 0

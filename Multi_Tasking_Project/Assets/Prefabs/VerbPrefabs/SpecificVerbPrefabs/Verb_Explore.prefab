@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 7709626846660587475}
   - component: {fileID: 7709626846660587472}
   - component: {fileID: 7709626846660587474}
+  - component: {fileID: 8264216458572574208}
   m_Layer: 5
   m_Name: Verb_Explore
   m_TagString: Untagged
@@ -272,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLeft: 0
+  startTime: 0
   countDown: {fileID: 7709626847951725788}
   ButtonControl: {fileID: 0}
   currentState: 0
@@ -281,6 +283,24 @@ MonoBehaviour:
   OneTime: 0
   button: {fileID: 0}
   buttonText: {fileID: 7709626847760013634}
+--- !u!114 &8264216458572574208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7709626846660587473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1e69755b28246df8c0a65e333b5ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Card: []
+  X_min: -155
+  X_max: -95
+  Y_min: 60
+  Y_max: 140
+  SnapPosition: {x: -125, y: 100, z: 0}
 --- !u!1 &7709626847760013632
 GameObject:
   m_ObjectHideFlags: 0

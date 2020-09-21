@@ -396,11 +396,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Card: []
-  X_min: -431.02
-  X_max: -370.9806
-  Y_min: 61.60004
-  Y_max: 146.755
-  SnapPosion: {x: -400, y: 100, z: 0}
+  X_min: -430
+  X_max: -370
+  Y_min: 60
+  Y_max: 140
+  SnapPosition: {x: -400, y: 100, z: 0}
 --- !u!1 &5042754840521069377
 GameObject:
   m_ObjectHideFlags: 0
